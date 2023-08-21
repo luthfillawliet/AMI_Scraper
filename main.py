@@ -16,8 +16,11 @@ def main():
         #print("Baris "+str(i))
         nomormeter = readdata.bacanomormeter(filepath=filepath,sheetname="list",baris=i)
         #print("Nomor Meter : "+str(nomormeter))
-        id_pelanggan = ap2t.get_info_pelanggan(tipe_pencarian="Nomor Meter",nomor_id=str(nomormeter),link_infopelanggan=link_info_pelanggan)
-        readdata.write_data(filepath=filepath,sheetname="list",data=id_pelanggan,column_number=2,row_number=i+2)
+        id_pelanggan,nomorgardu = ap2t.get_info_pelanggan(tipe_pencarian="Nomor Meter",nomor_id=str(nomormeter),link_infopelanggan=link_info_pelanggan)
+        #write idpel ke excel
+        readdata.write_idpel(filepath=filepath,sheetname="list",data=id_pelanggan,column_number=2,row_number=i+2)
+        #write nomor gardu ke excel
+        readdata.write_nomorgardu(filepath=filepath,sheetname="list",data=nomorgardu,column_number=3,row_number=i+2)
         #print("Id pelanggan :" + id_pelanggan)
         
         

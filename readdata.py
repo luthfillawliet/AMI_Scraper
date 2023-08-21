@@ -14,8 +14,13 @@ class readdata():
         nomormeter = df.loc[baris,"nomormeter"]
         return nomormeter
     
-    def write_data(filepath:str,sheetname:str,data:str,column_number:int,row_number:int):
+    def write_idpel(filepath:str,sheetname:str,data:str,column_number:int,row_number:int):
         workbook = openpyxl.load_workbook(filename=filepath)
         worksheet = workbook.get_sheet_by_name(sheetname)
         worksheet.cell(row=row_number,column=column_number).value = int(data)
+        workbook.save(filename=filepath)
+    def write_nomorgardu(filepath:str,sheetname:str,data:str,column_number:int,row_number:int):
+        workbook = openpyxl.load_workbook(filename=filepath)
+        worksheet = workbook.get_sheet_by_name(sheetname)
+        worksheet.cell(row=row_number,column=column_number).value = data
         workbook.save(filename=filepath)

@@ -138,19 +138,34 @@ class AP2T:
                 # )
                 # alamat = "Alamat : "+element4.get_attribute("value") + " "+element5.get_attribute("value")+" "+element6.get_attribute("value")+" "+element7.get_attribute(
                 #     "value")+" ,"+element10.get_attribute("value")+" ,"+element9.get_attribute("value")+" ,"+element8.get_attribute("value")+"\n"
+                #Masuk ke tab Data Teknik
+                tabTeknik = WebDriverWait(driver,10).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH,"/html/body/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div/div/div/form/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/ul/li[3]")
+                    )
+                )
+                tabTeknik.click()
+                #Ambil Value Nomor Gardunya
+                noGardu = WebDriverWait(driver,10).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH,"/html/body/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div/div/div/form/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]/div/div/div[3]/div/div/div/div[1]/div/div/div/div[1]/input")
+                    )
+                )
+                nomorgardu = noGardu.get_attribute("value")
+                print(nomorgardu)
                 # Klik tab APP
-                tabApp = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located(
-                        (By.XPATH, "/html/body/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div/div/div/form/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/ul/li[4]"))
-                )
-                tabApp.click()
-                element11 = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located(
-                        (By.XPATH, "/html/body/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div/div/div/form/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div[3]/div/div/div/div[1]/input"))
-                )
-                nomor_meter = element11.get_attribute("value")
-                nomor_meter = "Nomor kWh Meter : "+nomor_meter+"\n"
-                print(nomor_meter)
+                # tabApp = WebDriverWait(driver, 10).until(
+                #     EC.presence_of_element_located(
+                #         (By.XPATH, "/html/body/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div/div/div/form/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]/ul/li[4]"))
+                # )
+                # tabApp.click()
+                # element11 = WebDriverWait(driver, 10).until(
+                #     EC.presence_of_element_located(
+                #         (By.XPATH, "/html/body/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div/div/div/form/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div[1]/div/div/div/div[3]/div/div/div/div[1]/input"))
+                # )
+                # nomor_meter = element11.get_attribute("value")
+                # nomor_meter = "Nomor kWh Meter : "+nomor_meter+"\n"
+                # print(nomor_meter)
                 # # Get Merk kWh Meter
                 # element12 = WebDriverWait(driver, 10).until(
                 #     EC.presence_of_element_located(
@@ -172,18 +187,17 @@ class AP2T:
                 # fkm = element13.get_attribute("value")
                 # fkm = "Faktor Kali Meter : "+fkm+"\n"
                 # Merge semua data
-                time.sleep(0.5)
                 message = "Berhasil Ambil Info Pelanggan"
                 time.sleep(1)
-                return id_pelanggan
+                return id_pelanggan,nomorgardu
             except Exception as e:
                 message = "Kategori gagal di peroleh\nMessage Error : "+str(e)
                 print(message)
-                return "0"
+                return "0","null"
         except Exception as e:
             message = "Gagal membuka Info Pelanggan"
             print(message)
             print("Error message : ", e)
-            return "0"
+            return "0","null"
     
 
